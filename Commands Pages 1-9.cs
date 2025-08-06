@@ -1,9 +1,10 @@
 ﻿// Example based off the guide found here: https://static.au-uw2-prd.autodesk.com/Class_Handout_SD467609_Ben_Rand.pdf
 
-using Autodesk.AutoCAD.Runtime; // CommandMethod attribute comes from this namespace
-using Autodesk.AutoCAD.ApplicationServices; // missing from example, added for Document
 using System;
 using System.Linq;
+using Autodesk.AutoCAD.ApplicationServices; // missing from example, added for Document
+using Autodesk.AutoCAD.Runtime; // CommandMethod attribute comes from this namespace
+
 namespace Parcels
 {
     public class Commands
@@ -28,7 +29,6 @@ namespace Parcels
 
             editor.WriteMessage("\nHello World!");
             // Writes "Hello World!" to the command line in AutoCAD.
-
         }
     }
 }

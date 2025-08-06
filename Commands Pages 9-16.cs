@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-
-using Autodesk.AutoCAD.Runtime; // adds attributes: CommandMethod
 using Autodesk.AutoCAD.ApplicationServices; // adds types: Document
 using Autodesk.AutoCAD.Colors;
 using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Runtime; // adds attributes: CommandMethod
 using Autodesk.AutoCAD.Windows.Data; // adds types: LayerTable, and LayerTableRecord
 
 namespace Parcels
@@ -37,7 +36,6 @@ namespace Parcels
 
             editor.WriteMessage("\nHello World!");
             // Writes "Hello World!" to the command line in AutoCAD.
-
         }
 
         [CommandMethod("PS_CreateParcelLayer")]
@@ -50,9 +48,7 @@ namespace Parcels
 
     internal class ParcelLayer
     {
-        public ParcelLayer()
-        {
-        }
+        public ParcelLayer() { }
 
         internal void Create()
         {
@@ -96,7 +92,7 @@ namespace Parcels
                     layer = new LayerTableRecord
                     {
                         Name = layerName,
-                        Color = Color.FromColorIndex(ColorMethod.ByAci, 161)
+                        Color = Color.FromColorIndex(ColorMethod.ByAci, 161),
                         // NOTE: sets the color of the layer to a specific AutoCAD Color Index (ACI). Colors range from 0 to 256
                     };
                     /**
@@ -117,7 +113,6 @@ namespace Parcels
                 transaction.Commit(); // commit data to the datebase
             }
             ;
-
         }
     }
 }

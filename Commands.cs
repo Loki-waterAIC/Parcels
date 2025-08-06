@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-
-using Autodesk.AutoCAD.Runtime; // adds attributes: CommandMethod
 using Autodesk.AutoCAD.ApplicationServices; // adds types: Document
 using Autodesk.AutoCAD.Colors;
 using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.Windows.Data; // adds types: LayerTable and LayerTableRecord
 using Autodesk.AutoCAD.EditorInput; // adds types: PromptSelectionOptions
-
+using Autodesk.AutoCAD.Runtime; // adds attributes: CommandMethod
+using Autodesk.AutoCAD.Windows.Data; // adds types: LayerTable and LayerTableRecord
 
 namespace Parcels
 {
@@ -39,7 +37,6 @@ namespace Parcels
 
             editor.WriteMessage("\nHello World!");
             // Writes "Hello World!" to the command line in AutoCAD.
-
         }
 
         [CommandMethod("PS_CreateParcelLayer")]
@@ -60,8 +57,21 @@ namespace Parcels
 
     internal class ParcelCounter
     {
-        public ParcelCounter()
+        public ParcelCounter() { }
+
+        private PromptSelectionResult SelectParcels()
         {
+            var options = new PromptSelectionOptions();
+            options.MessageForAdding = "Add parcels";
+            options.MessageForRemoval = "Remove parcels";
+            var filter = new SelectionFilter(
+                new TypedValue[]
+                {
+                    new TypedValue((int)DxfCode.Start, "LWPOLYLINE"),
+                    new TypedValue((int)DxfCode.LayerName, "Parcels"),
+                }
+            );
+            return Active.Editor.GetSelection(options, filter);
         }
 
         public int Count()
@@ -70,11 +80,13 @@ namespace Parcels
             var options = new PromptSelectionOptions();
             options.MessageForAdding = "Add parcels";
             options.MessageForRemoval = "Remove parcels";
-            var filter = new SelectionFilter(new TypedValue[]
-            {
-                new TypedValue((int)DxfCode.Start, "LWPOLYLINE"),
-                new TypedValue((int)DxfCode.LayerName, "Parcels")
-            });
+            var filter = new SelectionFilter(
+                new TypedValue[]
+                {
+                    new TypedValue((int)DxfCode.Start, "LWPOLYLINE"),
+                    new TypedValue((int)DxfCode.LayerName, "Parcels"),
+                }
+            );
             var result = Active.Editor.GetSelection(options, filter);
             if (result.Status == PromptStatus.OK)
             {
@@ -96,9 +108,7 @@ namespace Parcels
 
     internal class ParcelLayer
     {
-        public ParcelLayer()
-        {
-        }
+        public ParcelLayer() { }
 
         internal void Create()
         {
@@ -142,7 +152,7 @@ namespace Parcels
                     layer = new LayerTableRecord
                     {
                         Name = layerName,
-                        Color = Color.FromColorIndex(ColorMethod.ByAci, 161)
+                        Color = Color.FromColorIndex(ColorMethod.ByAci, 161),
                         // NOTE: sets the color of the layer to a specific AutoCAD Color Index (ACI). Colors range from 0 to 256
                     };
                     /**
@@ -162,8 +172,6 @@ namespace Parcels
                 database.Clayer = layerTable[layerName]; // Clayer -> "Current Layer"
                 transaction.Commit(); // commit data to the datebase
             }
-            ;
-
         }
     }
 }
