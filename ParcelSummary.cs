@@ -10,5 +10,10 @@ namespace Parcels
     {
         public int Count { get; set; }
         public double Area { get; set; }
-    }
+
+        public void Write(IParcelSummarizer summarizer, IMessageWriter writer)
+        {
+            writer.WriteMessage(summarizer.GenerateSummary(this));
+        }
+    };
 }
