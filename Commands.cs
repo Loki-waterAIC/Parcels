@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Autodesk.AutoCAD.ApplicationServices; // adds types: Document
 using Autodesk.AutoCAD.Colors;
@@ -60,6 +61,11 @@ namespace Parcels
             var summary = cmd.Count();
             var summarizer = new ParcelSummarizer();
             summary.Write(summarizer, new AutocadMessageWriter());
+            var myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            summary.Write(
+                new TextParcelSummarizer(summarizer),
+                new TextMessageWriter(Path.Combine(myDocuments, "ParcelSummary.txt"), true)
+            );
         }
     }
 
