@@ -58,6 +58,7 @@
     <ItemGroup>
         <Compile Include="Active.cs" />
         <Compile Include="Commands.cs" />
+        <Compile Include="ParcelSummary.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

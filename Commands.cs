@@ -104,39 +104,60 @@ namespace Parcels
             return Active.Editor.GetSelection(options, filter);
         }
 
-        public int Count()
-        {
-            var count = 0;
-            // var options = new PromptSelectionOptions();
-            // options.MessageForAdding = "Add parcels";
-            // options.MessageForRemoval = "Remove parcels";
-            // var filter = new SelectionFilter(
-            //     new TypedValue[]
-            //     {
-            //         new TypedValue((int)DxfCode.Start, "LWPOLYLINE"),
-            //         new TypedValue((int)DxfCode.LayerName, "Parcels"),
-            //     }
-            // );
-            // var result = Active.Editor.GetSelection(options, filter);
-            var result = SelectParcels();
+        // public int Count()
+        // {
+        //     var count = 0;
+        //     // var options = new PromptSelectionOptions();
+        //     // options.MessageForAdding = "Add parcels";
+        //     // options.MessageForRemoval = "Remove parcels";
+        //     // var filter = new SelectionFilter(
+        //     //     new TypedValue[]
+        //     //     {
+        //     //         new TypedValue((int)DxfCode.Start, "LWPOLYLINE"),
+        //     //         new TypedValue((int)DxfCode.LayerName, "Parcels"),
+        //     //     }
+        //     // );
+        //     // var result = Active.Editor.GetSelection(options, filter);
+        //     var result = SelectParcels();
 
-            // result.Status is PromptStatus.OK if the user selected objects and pressed Enter.
+        //     // result.Status is PromptStatus.OK if the user selected objects and pressed Enter.
+        //     if (result.Status == PromptStatus.OK)
+        //     {
+        //         Active.UsingTransaction(tr =>
+        //         {
+        //             // => is a lambda operator, so this is a subfunction.
+        //             foreach (var objectId in result.Value.GetObjectIds())
+        //             {
+        //                 var polyline = (Polyline)tr.GetObject(objectId, OpenMode.ForRead);
+        //                 if (polyline.Closed)
+        //                 {
+        //                     count++;
+        //                 }
+        //             }
+        //         });
+        //     }
+        //     return count;
+        // }
+        public ParcelSummary Count()
+        {
+            var summary = new ParcelSummary();
+            var result = SelectParcels();
             if (result.Status == PromptStatus.OK)
             {
                 Active.UsingTransaction(tr =>
                 {
-                    // => is a lambda operator, so this is a subfunction.
                     foreach (var objectId in result.Value.GetObjectIds())
                     {
                         var polyline = (Polyline)tr.GetObject(objectId, OpenMode.ForRead);
                         if (polyline.Closed)
                         {
-                            count++;
+                            summary.Count++;
+                            summary.Area += polyline.Area;
                         }
                     }
                 });
             }
-            return count;
+            return summary;
         }
     }
 
