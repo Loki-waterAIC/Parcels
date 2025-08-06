@@ -20,3 +20,17 @@ _Also found in the repo file_
 ## Instructions:
 
 Follow along with the PDF.
+
+## NOTES
+
+Make sure the files you want to use, Commands.cs and Active.cs, are specified in the .csproj file.
+
+The .csproj file is what specifies what files .NET should use and which ones it should ignore. Think of it like a make file.
+
+```xml
+<ItemGroup>
+    <Compile Include="Active.cs" />
+    <Compile Include="Commands.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+</ItemGroup>
+```
