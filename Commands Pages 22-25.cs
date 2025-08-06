@@ -46,20 +46,12 @@ namespace Parcels
             creator.Create();
         }
 
-        // [CommandMethod("PS_CountParcels")]
-        // public void CountParcels()
-        // {
-        //     var cmd = new ParcelCounter();
-        //     var summary = cmd.Count();
-        //     Active.Editor.WriteMessage($"\nFound {summary} parcels.");
-        // }
         [CommandMethod("PS_CountParcels")]
         public void CountParcels()
         {
             var cmd = new ParcelCounter();
             var summary = cmd.Count();
-            var summarizer = new ParcelSummarizer();
-            summary.Write(summarizer, new AutocadMessageWriter());
+            Active.Editor.WriteMessage($"\nFound {summary} parcels.");
         }
     }
 
