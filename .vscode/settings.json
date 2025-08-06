@@ -3,7 +3,8 @@
     "workbench.iconTheme": "vs-seti",
     "cSpell.ignoreWords": [
         "Clayer",
-        "LWPOLYLINE"
+        "LWPOLYLINE",
+        "entsel"
     ],
     "dotnet.defaultSolution": "Parcels.csproj",
     "dotnet.preferCSharpExtension": true,
