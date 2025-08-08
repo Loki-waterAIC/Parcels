@@ -66,10 +66,6 @@ namespace Parcels
                 new TextParcelSummarizer(summarizer),
                 new TextMessageWriter(Path.Combine(myDocuments, "ParcelSummary.txt"), true)
             );
-            summary.Write(
-                new HtmlParcelSummarizer(),
-                new TextMessageWriter(Path.Combine(myDocuments, "ParcelSummary.html"), false)
-            );
         }
     }
 
