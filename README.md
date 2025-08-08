@@ -10,7 +10,7 @@ This project specifically follows the handout found here:
 
 - [Class_Handout_SD467609_Ben_Rand.pdf [Download]](https://static.au-uw2-prd.autodesk.com/Class_Handout_SD467609_Ben_Rand.pdf)
 
-_Also found in the repo file_
+_Also found in the repo files with notes and markups_
 
 ## Requirements:
 
