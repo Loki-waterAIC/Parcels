@@ -21,6 +21,8 @@ _Also found in the repo files with notes and markups_
 
 Follow along with the PDF.
 
+If not following along in the PDF, start from commands.cs
+
 ## NOTES
 
 Make sure the files you want to use, Commands.cs and Active.cs, are specified in the .csproj file.
